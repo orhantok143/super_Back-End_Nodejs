@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000
 connectdDB()
 
 
-const whitelist = ['http://localhost:3000', 'http://192.168.16.108:3000']; // İzin verilen kök URL'lerin listesi
+const whitelist = ['http://localhost:3000', 'http://192.168.16.108:3000', "https://cafe-life.netlify.app"]; // İzin verilen kök URL'lerin listesi
 
 const corsOptions = {
     origin: function (origin, callback) {
