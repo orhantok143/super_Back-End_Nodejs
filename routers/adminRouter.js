@@ -16,7 +16,6 @@ aRouter.route("/:id")
     .get(auth, authorize(["Admin", "SuperAdmin"]), Admin.get)
 aRouter.get("/", Admin.getAll)
 aRouter.post("/login", Admin.login)
-aRouter.post("/loginwithgoogle", AdminFirebase.loginWithGoogle)
 aRouter.post("/checktoken", auth, Admin.checkToken)
 
 

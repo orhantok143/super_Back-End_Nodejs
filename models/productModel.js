@@ -32,12 +32,13 @@ const productSchema = new mongoose.Schema({
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     business: { type: mongoose.Schema.Types.ObjectId, ref: 'Business', required: true },
     reviews: [reviewSchema],
-    averageRating: { type: Number, default: 0, min: 0, max: 10 },
+    averageRating: { type: Number, default: 0, min: 0, max: 5 },
     isActive: { type: Boolean, default: true },
     activeHours: [{ type: Number, default: [1, 23] }], // [startHour, endHour] formatında
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: Object }],
     addToFavotiresUser: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }]
+
 }, {
     timestamps: true
 });
@@ -46,7 +47,7 @@ const productSchema = new mongoose.Schema({
 productSchema.methods.calculateAverageRating = function () {
     if (this.reviews.length > 0) {
         const total = this.reviews.reduce((acc, review) => acc + review.rating, 0);
-        this.averageRating = (total / this.reviews.length) * 2;
+        this.averageRating = (total / this.reviews.length);
     } else {
         this.averageRating = 0;
     }

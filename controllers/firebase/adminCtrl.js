@@ -13,14 +13,12 @@ import { createError } from '../../middlewares/errorHandler.js'; // errorHandler
 import multer from 'multer';
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
-import { db, storage } from "../../database/firebase.config.js";
-import admin from "firebase-admin"
-import serviceAccount from "../../cafe-cd33f-firebase-adminsdk-k73q2-ad9cb6a0b1.json"assert { type: 'json' };
+import { db } from "../../database/firebase.config.js";
+
+// import serviceAccount from "../../cafe-cd33f-firebase-adminsdk-k73q2-ad9cb6a0b1.json"assert { type: 'json' };
 
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
+
 
 
 const multerStorage = multer.memoryStorage();
@@ -138,15 +136,15 @@ class Admin {
             next(createError(500, 'Giriş yapılamadı: ' + error.message));
         }
     };
-    static loginWithGoogle = async (req, res, next) => {
-        const { token } = req.body;
-        try {
-            const decodedToken = await admin.auth().verifyIdToken(token);
-            res.status(200).send(decodedToken);
-        } catch (error) {
-            res.status(401).send('Unauthorized');
-        }
-    }
+    // static loginWithGoogle = async (req, res, next) => {
+    //     const { token } = req.body;
+    //     try {
+    //         const decodedToken = await admin.auth().verifyIdToken(token);
+    //         res.status(200).send(decodedToken);
+    //     } catch (error) {
+    //         res.status(401).send('Unauthorized');
+    //     }
+    // }
 }
 
 export default Admin;

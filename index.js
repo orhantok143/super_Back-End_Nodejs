@@ -2,7 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import { Routers } from "./routers/indexRouter.js"
 import connectdDB from "./database/dbConnection.js"
-import errorHandler from "./middlewares/errorHandler.js"
+import errorHandler, { createError } from "./middlewares/errorHandler.js"
 import morgan from "morgan"
 import cors from "cors"
 dotenv.config()
@@ -15,14 +15,14 @@ const PORT = process.env.PORT || 5000
 connectdDB()
 
 
-const whitelist = ['http://localhost:3000', 'http://192.168.16.108:3000', "https://cafe-life.netlify.app"]; // İzin verilen kök URL'lerin listesi
+const whitelist = ['http://localhost:3000', 'http://192.168.16.105:3000', "https://cafe-life.netlify.app"]; // İzin verilen kök URL'lerin listesi
 
 const corsOptions = {
     origin: function (origin, callback) {
         if (whitelist.indexOf(origin) !== -1 || !origin) {
             callback(null, true);
         } else {
-            callback(new Error('Not allowed by CORS'));
+            callback(new createError(500, 'Not allowed by CORS'));
         }
     },
     credentials: true,
