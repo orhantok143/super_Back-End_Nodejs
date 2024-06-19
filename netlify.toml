@@ -1,25 +1,17 @@
 [functions]
-  directory = "build"
+  directory = "routers"
 
 [[redirects]]
-  from = "/api/v2/user/*"
+  from = "/*"
   to = "/"
   status = 200
 
 [[redirects]]
-  from = "/api/v2/admin/*"
+  from = "/api/v2/*"
   to = "/"
   status = 200
 
-[[redirects]]
-  from = "/api/v2/product/*"
-  to = "/"
-  status = 200
 
-[[redirects]]
-  from = "/api/v2/category/*"
-  to = "/"
-  status = 200
 
 
 [build]
