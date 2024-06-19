@@ -6,7 +6,7 @@ status = 200
 
 [build]
   command = "npm install"
-  publish = "build"
+  publish = "/"
 
 [context.production.environment]
   NODE_VERSION = "14"
