@@ -1,24 +1,24 @@
 [functions]
-  directory = "conrollers"
+  directory = "routers"
 
 [[redirects]]
   from = "/api/v2/user/*"
-  to = "/.conrollers/user/:splat"
+  to = "/"
   status = 200
 
 [[redirects]]
   from = "/api/v2/admin/*"
-  to = "/.conrollers/admin/:splat"
+  to = "/"
   status = 200
 
 [[redirects]]
   from = "/api/v2/product/*"
-  to = "/.conrollers/product/:splat"
+  to = "/"
   status = 200
 
 [[redirects]]
   from = "/api/v2/category/*"
-  to = "/.conrollers/category/:splat"
+  to = "/"
   status = 200
 
 
