@@ -16,18 +16,18 @@ class ProductControllers {
     static create = async (req, res, next) => {
         try {
             const file = req.file;
-
             if (!file) {
                 return next(createError(400, 'No file uploaded'));
             }
 
             const resizedBuffer = await sharp(file.buffer)
-                .resize(800, 800, { fit: 'contain' })
+                .resize({ fit: 'contain' })
                 .toBuffer();
 
             const result = await uploadToCloudinary(resizedBuffer);
 
-            const { name, price, category, subCategory } = req.body;
+
+            const { name, price, category, subCategory, description } = req.body;
             const ownerId = req.user.id;
             const businessId = req.user.business;
 
@@ -36,10 +36,8 @@ class ProductControllers {
             if (!user || !business) {
                 return next(createError(404, 'Kullanıcı veya işletme bulunamadı'));
             }
-
             const findCategory = await Category.findOne({ title: category })
             const findsubCategory = await subCategoryModel.findOne({ title: subCategory })
-
 
             if (!findCategory) {
                 return next(createError(500, "Kategory bulunamadı", error.message))
@@ -59,7 +57,8 @@ class ProductControllers {
                 subCategory: findsubCategory,
                 owner: ownerId,
                 business: businessId,
-                images: [image]
+                images: [image],
+                description
             });
 
             await product.save();
@@ -363,9 +362,6 @@ class ProductControllers {
     static addToFavorites = async (req, res, next) => {
         try {
             const { id } = req.params;
-
-
-
             const product = await Product.findById(id);
             const user = await User.findById(req.user.id)
             if (!product) {
@@ -374,7 +370,6 @@ class ProductControllers {
             if (!user) {
                 throw createError(404, 'Kullanıcı bulunamadı');
             }
-
             const isFavori = product.addToFavotiresUser?.includes(req.user.id)
             if (isFavori) {
                 product.addToFavotiresUser.pull(req.user.id)

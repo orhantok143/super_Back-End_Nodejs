@@ -91,7 +91,6 @@ class Admin {
 
     static checkToken = async (req, res, next) => {
         const token = req.header('Authorization')?.replace('Bearer ', '');
-        console.log(token);
         try {
             if (token) {
                 const userFind = await User.findById(req.user.id)

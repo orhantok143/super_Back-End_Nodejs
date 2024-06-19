@@ -37,8 +37,10 @@ const productSchema = new mongoose.Schema({
     activeHours: [{ type: Number, default: [1, 23] }], // [startHour, endHour] formatında
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: Object }],
-    addToFavotiresUser: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }]
-
+    addToFavotiresUser: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    time: {
+        type: Number
+    }
 }, {
     timestamps: true
 });
