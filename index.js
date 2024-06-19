@@ -28,7 +28,9 @@ app.use("/api/v2/user", Routers.userRoute)
 app.use("/api/v2/admin", Routers.adminRoute)
 app.use("/api/v2/product", Routers.productRoute)
 app.use("/api/v2/category", Routers.categoryRoute)
-app.use("/", (req, res) => {
+
+
+app.get("/", (req, res) => {
     res.json({
         message: "Welcome to Cafe Life API"
     })
