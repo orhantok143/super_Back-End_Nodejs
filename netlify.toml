@@ -1,7 +1,25 @@
+[functions]
+  directory = "conrollers"
+
 [[redirects]]
-from = "/api/v2/*"
-to = "/"
-status = 200
+  from = "/api/v2/user/*"
+  to = "/.conrollers/user/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/v2/admin/*"
+  to = "/.conrollers/admin/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/v2/product/*"
+  to = "/.conrollers/product/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/v2/category/*"
+  to = "/.conrollers/category/:splat"
+  status = 200
 
 
 [build]
