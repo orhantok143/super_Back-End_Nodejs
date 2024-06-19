@@ -15,5 +15,5 @@
 
 
 [build]
-command = "npm install"
-publish = "/"
+command = "npm run production"
+publish = ""
