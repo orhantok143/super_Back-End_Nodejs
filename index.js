@@ -23,6 +23,11 @@ app.use(express.urlencoded({ extended: true }))
 app.use(morgan("dev"))
 
 // Main Routes
+app.use("/", (req, res) => {
+    res.json({
+        message: "Welcome to Cafe Life API"
+    })
+})
 app.use("/api/v2/user", Routers.userRoute)
 app.use("/api/v2/admin", Routers.adminRoute)
 app.use("/api/v2/product", Routers.productRoute)
