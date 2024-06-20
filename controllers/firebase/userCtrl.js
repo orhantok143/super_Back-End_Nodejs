@@ -3,7 +3,7 @@ import sharp from 'sharp';
 import { doc, getDoc, setDoc, updateDoc, deleteDoc, collection, getDocs } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { db, storage } from "../../database/firebase.config.js";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt-nodejs"
 
 
 class userCtrl {
