@@ -12,7 +12,7 @@ import {
 import { createError } from '../../middlewares/errorHandler.js'; // errorHandler'dan createError fonksiyonunu import ediyoruz
 import multer from 'multer';
 import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt-nodejs"
+import argon from "argon2"
 import { db } from "../../database/firebase.config.js";
 
 // import serviceAccount from "../../cafe-cd33f-firebase-adminsdk-k73q2-ad9cb6a0b1.json"assert { type: 'json' };

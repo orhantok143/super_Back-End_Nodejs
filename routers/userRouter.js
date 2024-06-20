@@ -2,7 +2,6 @@ import express from "express"
 import User from "../controllers/userCtrl.js"
 import auth from "../middlewares/authMiddleware.js"
 import authorize from "../middlewares/roleMiddleware.js"
-import userCtrl from "../controllers/firebase/userCtrl.js"
 const uRouter = express.Router()
 
 

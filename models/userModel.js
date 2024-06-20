@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt-nodejs"
+import argon2 from "argon2"
 
 const userModel = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
@@ -25,18 +25,20 @@ userModel.pre('save', async function (next) {
         return next();
     }
     try {
-        const salt = await bcrypt.genSalt(10);
-        this.password = await bcrypt.hash(this.password, salt);
+        this.password = await argon2.hash(this.password);
         next();
     } catch (err) {
         next(err);
     }
 });
 
-
 // Method to compare password
 userModel.methods.isMatch = async function (password) {
-    return await bcrypt.compare(password, this.password);
+    try {
+        return await argon2.verify(this.password, password);
+    } catch (err) {
+        return false;
+    }
 };
 
 

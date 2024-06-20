@@ -21,7 +21,7 @@ class userCtrl {
                 data: newUser
             });
         } catch (error) {
-            next(error); // Hata meydana geldiğinde hata işleyiciyi çağır
+            next(createError(500, "bir sorun oluştu")); // Hata meydana geldiğinde hata işleyiciyi çağır
         }
     }
 
