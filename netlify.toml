@@ -1,19 +1,20 @@
 [functions]
-  directory = "routers"
+  external_node_modules = ["express"]
+  node_bundler = "esbuild"
 
 [[redirects]]
+  force = true
   from = "/*"
   to = "/"
   status = 200
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  force = true
+  from = "/api/v2/*"
   status = 200
-
-
-
+  to = "/"
 
 [build]
-command = "npm run production"
-publish = ""
+command = "npm run build"
+publish = "/build"
+
