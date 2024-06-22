@@ -16,7 +16,7 @@ connectdDB()
 
 // Middlewares
 app.use(cors(
-    { origin: ["https://cafe-life.netlify.app", "http://localhost:3000"] }
+    { origin: ["https://cafe-life.netlify.app", "http://localhost:3000", "https://cafe-life.onrender.com"] }
 ));
 app.use(express.json({ limit: "100mb" }))
 app.use(express.urlencoded({ extended: true }))
