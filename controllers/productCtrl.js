@@ -20,6 +20,8 @@ class ProductControllers {
                 return next(createError(400, 'No file uploaded'));
             }
 
+
+            console.log("product::", req.file);
             const resizedBuffer = await sharp(file.buffer)
                 .resize({ fit: 'contain' })
                 .toBuffer();
@@ -39,8 +41,14 @@ class ProductControllers {
             const findCategory = await Category.findOne({ title: category })
             const findsubCategory = await subCategoryModel.findOne({ title: subCategory })
 
+            console.log("Category:", findCategory);
+            console.log("sunCategory:", findsubCategory);
             if (!findCategory) {
-                return next(createError(500, "Kategory bulunamadı", error.message))
+                return next(createError(404, "Kategori bulunamadı"));
+            }
+
+            if (!findsubCategory) {
+                return next(createError(404, "Alt kategori bulunamadı"));
             }
             const image = {
                 url: result.secure_url,
@@ -53,11 +61,11 @@ class ProductControllers {
             const product = new Product({
                 name,
                 price,
-                category: findCategory,
-                subCategory: findsubCategory,
+                category: findCategory.title,
+                subCategory: findsubCategory.title,
                 owner: ownerId,
                 business: businessId,
-                images: [image],
+                images: image ? [image] : [],
                 description
             });
 
