@@ -79,15 +79,31 @@ class CategoryController {
 
     static delete = async (req, res, next) => {
         try {
-            const categoryId = req.params.id;
-            const deletedCategory = await Category.findByIdAndDelete(categoryId);
-            deletedCategory.subCategory.map(async (sub) => await subCategoryModel.findByIdAndDelete(sub._id))
-            if (!deletedCategory) {
-                return next(createError(404, 'Silinecek kategori bulunamadı'));
+            const subCategoryId = req.params.id;
+
+            // Alt kategoriyi bul ve ana kategoriden çıkart
+            const updatedCategory = await Category.findOneAndUpdate(
+                { "subCategory._id": subCategoryId },
+                { $pull: { subCategory: { _id: subCategoryId } } },
+                { new: true }
+            );
+
+            if (!updatedCategory) {
+                return next(createError(404, 'Silinecek alt kategori bulunamadı'));
             }
-            res.status(200).json({ message: 'Kategori başarıyla silindi' });
+
+            // Eğer ana kategorinin alt kategorileri boşaldıysa ana kategoriyi sil
+            if (updatedCategory.subCategory.length === 0) {
+                const deletedCategory = await Category.findByIdAndDelete(updatedCategory._id);
+                if (!deletedCategory) {
+                    return next(createError(404, 'Ana kategori bulunamadı veya silinemedi'));
+                }
+                res.status(200).json({ message: 'Alt kategori ve ana kategori başarıyla silindi' });
+            } else {
+                res.status(200).json({ message: 'Alt kategori başarıyla silindi' });
+            }
         } catch (error) {
-            next(createError(500, 'Kategori silinemedi: ' + error.message));
+            next(createError(500, 'Alt kategori silinemedi: ' + error.message));
         }
     }
 
