@@ -10,7 +10,7 @@ const userModel = new mongoose.Schema({
         default: "logo.png"
     },
     role: { type: String, enum: ['User', 'Admin', 'SuperAdmin'], default: 'User' },
-    business: { type: mongoose.Schema.Types.ObjectId, ref: 'Business' },
+    business: { type: Object },
     rating: [{ type: Object, ref: "Review" }],
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: Object }],
