@@ -5,28 +5,27 @@ import connectdDB from "./database/dbConnection.js";
 import errorHandler from "./middlewares/errorHandler.js";
 import morgan from "morgan";
 import cors from "cors";
-import fs from "fs";
-import https from "https";
+
 
 dotenv.config();
 
 const app = express();
-// const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 // Database Connection
 connectdDB();
 
 // SSL/TLS sertifikası ve özel anahtarı yükle (kendi kendine imzalı)
-const privateKey = fs.readFileSync('server.key', 'utf8');
-const certificate = fs.readFileSync('server.cert', 'utf8');
+// const privateKey = fs.readFileSync('server.key', 'utf8');
+// const certificate = fs.readFileSync('server.cert', 'utf8');
 
-const credentials = {
-    key: privateKey,
-    cert: certificate
-};
+// const credentials = {
+//     key: privateKey,
+//     cert: certificate
+// };
 
-// HTTPS sunucusunu oluştur
-const httpsServer = https.createServer(credentials, app);
+// // HTTPS sunucusunu oluştur
+// const httpsServer = https.createServer(credentials, app);
 
 // Middleware
 app.use(cors({
@@ -52,6 +51,6 @@ app.get("/", (req, res) => {
 app.use(errorHandler);
 
 // HTTPS sunucusunu dinle
-httpsServer.listen(443, () => {
-    console.log('HTTPS sunucusu 443 portunda çalışıyor.');
+app.listen(PORT, () => {
+    console.log(`Sunucusu ${PORT} portunda çalışıyor.`);
 });
