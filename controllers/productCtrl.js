@@ -211,6 +211,9 @@ class ProductControllers {
             const { rating, comment } = req.body;
             const { id } = req.user
 
+
+            console.log("pId:",productId)
+            console.log("pId:",rating)
             // Ürünü veritabanından bul
             const product = await Product.findById(productId);
             const user = await User.findById(id)
