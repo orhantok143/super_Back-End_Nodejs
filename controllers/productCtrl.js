@@ -79,7 +79,7 @@ class ProductControllers {
     static update = async (req, res, next) => {
         try {
             const { id } = req.params;
-            const { name, price } = req.body;
+            const { price } = req.body;
             const file = req.file;
 
             let image;
