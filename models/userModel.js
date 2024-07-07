@@ -5,7 +5,7 @@ const userModel = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    Image: {
+    image: {
         type: String,
         default: "logo.png"
     },
@@ -13,9 +13,14 @@ const userModel = new mongoose.Schema({
     business: { type: Object },
     rating: [{ type: Object, ref: "Review" }],
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    comments: [{ type: Object }],
+    likePost: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    myFavorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }]
+    followes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    myFavorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post"
+    }]
 
 
 });

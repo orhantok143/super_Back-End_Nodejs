@@ -34,7 +34,7 @@ const productSchema = new mongoose.Schema({
     reviews: [reviewSchema],
     averageRating: { type: Number, default: 0, min: 0, max: 5 },
     isActive: { type: Boolean, default: true },
-    activeHours: [{ type: Number, default: [1, 23] }], // [startHour, endHour] formatında
+    activeHours: [{ type: Number, default: [0, 23] }], // [startHour, endHour] formatında
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: Object }],
     addToFavotiresUser: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],

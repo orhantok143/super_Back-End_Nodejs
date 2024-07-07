@@ -176,7 +176,7 @@ class ProductControllers {
     static getAll = async (req, res, next) => {
         try {
 
-            const products = await Product.find().populate('owner', 'name').populate('business', 'name');
+            const products = await Product.find()
             const now = new Date();
             const productsWithStatus = products.map(product => {
                 product.isActive = this.#isProductActive(product, now);
@@ -187,7 +187,6 @@ class ProductControllers {
             next(error); // Hata meydana geldiğinde hata işleyiciyi çağır
         }
     }
-
     // Ürünün aktif olup olmadığını kontrol eden fonksiyon
     static #isProductActive = (product) => {
         if (!product.activeHours || product.activeHours.length !== 2) {
@@ -259,9 +258,9 @@ class ProductControllers {
 
     // Fiyat geçmişini güncelle
     static updatePriceHistory = async (req, res, next) => {
+        const { id } = req.params;
+        const { price } = req.body;
         try {
-            const { id } = req.params;
-            const { price } = req.body;
             const product = await Product.findById(id);
             if (!product) {
                 throw createError(404, 'Ürün bulunamadı');

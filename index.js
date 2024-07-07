@@ -15,21 +15,9 @@ const PORT = process.env.PORT || 5000;
 // Database Connection
 connectdDB();
 
-// SSL/TLS sertifikası ve özel anahtarı yükle (kendi kendine imzalı)
-// const privateKey = fs.readFileSync('server.key', 'utf8');
-// const certificate = fs.readFileSync('server.cert', 'utf8');
-
-// const credentials = {
-//     key: privateKey,
-//     cert: certificate
-// };
-
-// // HTTPS sunucusunu oluştur
-// const httpsServer = https.createServer(credentials, app);
-
 // Middleware
 app.use(cors({
-    origin: ["https://cafe-life.netlify.app", "http://localhost:3000", "https://cafe-life.onrender.com", "http://192.168.16.106:3000"]
+    origin: ["https://cafe-life.netlify.app", "http://localhost:3000"]
 }));
 app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ extended: true }));
