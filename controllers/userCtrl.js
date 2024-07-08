@@ -168,7 +168,7 @@ class userCtrl {
                     const post = await Post.create({
                         content,
                         author: user._id,
-                        mediaUrl
+                        media: mediaUrl
                     });
                     res.json({ user, post });
                 });
@@ -367,7 +367,7 @@ class userCtrl {
         const { postId } = req.params; // Yorum yapılacak postun ID'si
         const { id } = req.user; // İşlemi yapan kullanıcının ID'si
         const { content } = req.body; // Yorum içeriği
-
+        console.log(req.body)
         try {
             // Kullanıcıyı bul
             const user = await User.findById(id);
