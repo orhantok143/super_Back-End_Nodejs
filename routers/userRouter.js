@@ -34,7 +34,7 @@ uRouter.route("/register").post(User.register)
 uRouter.route("/:id").get(auth, authorize(["SuperAdmin"]), User.get)
 uRouter.route("/:id").delete(auth, authorize(["SuperAdmin"]), User.delete)
 uRouter.route("/:id").put(auth, authorize(["SuperAdmin"]), User.update)
-uRouter.route("/").get(auth, authorize(["SuperAdmin"]), User.getAll)
+uRouter.route("/").get(auth, User.getAll)
 
 
 

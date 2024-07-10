@@ -85,10 +85,9 @@ class userCtrl {
     static getAll = async (req, res, next) => {
         try {
             const allUsers = await User.find();
-            res.status(200).json({
-                success: true,
-                data: allUsers
-            });
+            res.status(200).json(
+                allUsers
+            );
         } catch (error) {
             next(error); // Hata meydana geldiğinde hata işleyiciyi çağır
         }
