@@ -20,8 +20,6 @@ class ProductControllers {
                 return next(createError(400, 'No file uploaded'));
             }
 
-
-            console.log("product::", req.file);
             const resizedBuffer = await sharp(file.buffer)
                 .resize({ fit: 'contain' })
                 .toBuffer();

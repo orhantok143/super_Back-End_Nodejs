@@ -137,9 +137,9 @@ class userCtrl {
     // Create Post
     static createPost = async (req, res, next) => {
         const { id } = req.user;
-        const { content ,image} = req.body;
-        const file = image
-
+        const { content} = req.body;
+        const file = req.file
+        console.log(req.body);
         try {
             const user = await User.findById(id);
             if (!user) {

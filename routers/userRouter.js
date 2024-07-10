@@ -2,6 +2,7 @@ import express from "express"
 import User from "../controllers/userCtrl.js"
 import auth from "../middlewares/authMiddleware.js"
 import authorize from "../middlewares/roleMiddleware.js"
+import upload from "../middlewares/upload.js"
 const uRouter = express.Router()
 
 
@@ -28,7 +29,7 @@ uRouter.route("/post/:_id").put(auth, User.updatePost)
 uRouter.route("/comment").get(auth, User.getAllComment)
 
 uRouter.route("/post").get(auth, User.getAllPost)
-uRouter.route("/post").post(auth, User.createPost)
+uRouter.route("/post").post(auth,upload.single("image"), User.createPost)
 uRouter.route("/register").post(User.register)
 
 uRouter.route("/:id").get(auth, authorize(["SuperAdmin"]), User.get)
