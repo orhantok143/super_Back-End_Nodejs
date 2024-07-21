@@ -58,6 +58,7 @@ class Admin {
     };
 
     static getAll = async (req, res, next) => {
+        
         try {
             const allBusiness = await Business.find();
             res.status(200).json({

@@ -172,9 +172,12 @@ class ProductControllers {
 
     // Tüm ürünleri al
     static getAll = async (req, res, next) => {
-        try {
 
-            const products = await Product.find()
+        try {
+            const {businessId} = req.query
+            console.log(businessId);
+            
+            const products = await Product.find({business:businessId})
             const now = new Date();
             const productsWithStatus = products.map(product => {
                 product.isActive = this.#isProductActive(product, now);
