@@ -49,7 +49,7 @@ const productSchema = new mongoose.Schema({
 productSchema.methods.calculateAverageRating = function () {
     if (this.reviews.length > 0) {
         const total = this.reviews.reduce((acc, review) => acc + review.rating, 0);
-        this.averageRating = (total / this.reviews.length);
+        this.averageRating = Math.floor((total / this.reviews.length))
     } else {
         this.averageRating = 0;
     }
